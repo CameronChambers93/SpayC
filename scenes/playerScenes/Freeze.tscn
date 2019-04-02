@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://scripts/playerScripts/Bullets.gd" type="Script" id=1]
+[ext_resource path="res://sprites/SpriteSheet.tex" type="Texture" id=2]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -5.13143, 5.09186, -6.1477, -6.77161, 5.53938, -5.64175, 5.53938, 5.09186 )
+
+[node name="Freeze" type="Area2D"]
+
+transform/pos = Vector2( -0.0409575, -0.144744 )
+transform/scale = Vector2( 0.563014, 0.506412 )
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/scale = Vector2( 4, 4 )
+texture = ExtResource( 2 )
+vframes = 20
+hframes = 20
+frame = 21
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+
+visibility/visible = false
+build_mode = 0
+polygon = Vector2Array( -5.13143, 5.09186, -6.1477, -6.77161, 5.53938, -5.64175, 5.53938, 5.09186 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[connection signal="area_enter" from="." to="." method="_on_Freeze_area_enter"]
+
+[connection signal="body_enter" from="." to="." method="_on_Freeze_body_enter"]
+
+

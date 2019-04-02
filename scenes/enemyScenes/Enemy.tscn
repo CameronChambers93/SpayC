@@ -1,0 +1,79 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://scripts/enemyScripts/Enemy.gd" type="Script" id=1]
+[ext_resource path="res://Player/Graphics/icon.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 32.3847, 32.5951 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 5.42935 )
+
+[node name="Enemy" type="KinematicBody2D"]
+
+transform/pos = Vector2( 844.384, 1228.18 )
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 1 )
+maxHealth = 100
+currentHealth = 100
+damage = 25
+directionH = 1
+directionV = 1
+speedH = 0
+speedV = 0
+speed = 0
+acceleration = 0
+vulnFreeze = true
+vulnElectric = true
+enemyType = 5
+
+[node name="Enemy Sprite" type="Sprite" parent="."]
+
+transform/scale = Vector2( 10, 10 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Area2D" type="Area2D" parent="."]
+
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 5.561, 0, 0, 4.07873, 1.00472, -1.87447 )
+shapes/0/trigger = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="TriggerCollision" type="CollisionShape2D" parent="Area2D"]
+
+transform/pos = Vector2( 1.00472, -1.87447 )
+transform/scale = Vector2( 5.561, 4.07873 )
+shape = SubResource( 2 )
+trigger = true
+_update_shape_index = 0
+
+[node name="Damage Delay" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[connection signal="body_enter" from="Area2D" to="." method="_on_Area2D_body_enter"]
+
+

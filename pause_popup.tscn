@@ -1,0 +1,120 @@
+[gd_scene load_steps=7 format=1]
+
+[ext_resource path="res://scripts/menuScripts/cntr_pause.gd" type="Script" id=1]
+[ext_resource path="res://sprites/black.png" type="Texture" id=2]
+[ext_resource path="res://scripts/menuScripts/resumeButton.gd" type="Script" id=3]
+[ext_resource path="res://scripts/menuScripts/MuteSFX.gd" type="Script" id=4]
+[ext_resource path="res://scripts/menuScripts/MuteMusic.gd" type="Script" id=5]
+[ext_resource path="res://scripts/menuScripts/quitButton.gd" type="Script" id=6]
+
+
+
+
+
+
+[node name="pause_popup" type="Container"]
+
+process/pause_mode = 2
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+script/script = ExtResource( 1 )
+
+[node name="TextureFrame" type="TextureFrame" parent="."]
+
+visibility/self_opacity = 0.6
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 319.0
+margin/bottom = 322.0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 0
+
+[node name="Resume" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 134.0
+margin/top = 103.0
+margin/right = 198.0
+margin/bottom = 123.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Resume"
+flat = false
+script/script = ExtResource( 3 )
+
+[node name="MuteSFX" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 186.0
+margin/top = 236.0
+margin/right = 257.0
+margin/bottom = 256.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Mute SFX"
+flat = false
+script/script = ExtResource( 4 )
+
+[node name="MuteMusic" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 43.0
+margin/top = 236.0
+margin/right = 130.0
+margin/bottom = 256.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Mute Music"
+flat = false
+script/script = ExtResource( 5 )
+
+[node name="Quit" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 148.0
+margin/top = 135.0
+margin/right = 188.0
+margin/bottom = 155.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Quit"
+flat = false
+script/script = ExtResource( 6 )
+
+[connection signal="pressed" from="Resume" to="Resume" method="_on_Resume_pressed"]
+
+[connection signal="pressed" from="MuteSFX" to="MuteSFX" method="_on_MuteSFX_pressed"]
+
+[connection signal="pressed" from="MuteMusic" to="MuteMusic" method="_on_MuteMusic_pressed"]
+
+[connection signal="pressed" from="Quit" to="Quit" method="_on_Quit_pressed"]
+
+

@@ -1,0 +1,136 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://scripts/enemyScripts/Enemy.gd" type="Script" id=1]
+[ext_resource path="res://sprites/EnemySheet.tex" type="Texture" id=2]
+
+[sub_resource type="Curve2D" id=1]
+
+bake_interval = 5.0
+_data = {
+"points": Vector2Array( 0, 0, 0, 0, -45.4642, 13.2065, 0, 0, 0, 0, -66.8093, 36.1328, 0, 0, 0, 0, -74.4514, 63.0118, 0, 0, 0, 0, -72.6067, 84.3569, 0, 0, 0, 0, -55.7414, 97.7965, 0, 0, 0, 0, -25.1731, 105.966, 0, 0, 0, 0, 5.1317, 107.81, 0, 0, 0, 0, 32.2743, 105.702, 0, 0, 0, 0, 53.3559, 98.06, 0, 0, 0, 0, 64.9508, 89.6273, 0, 0, 0, 0, 77.0727, 76.9784, 0, 0, 0, 0, 86.5594, 64.8564, 0, 0, 0, 0, 91.8298, 47.9912, 0, 0, 0, 0, 90.5122, 37.9774, 0, 0, 0, 0, 85.7689, 25.3284, 0, 0, 0, 0, 80.2349, 16.8958, 0, 0, 0, 0, 69.1671, 9.51722, 0, 0, 0, 0, 65.2143, 8.46314, 0, 0, 0, 0, 54.937, 5.82794, 0, 0, 0, 0, 46.7679, 5.03737, 0, 0, 0, 0, 39.6528, 4.77386, 0, 0, 0, 0, 19.3618, 4.77386, 0, 0, 0, 0, -1.71982, 5.03737, 0, 0, 0, 0, -18.3216, 5.3009, 0, 0, 0, 0, -28.8624, 6.35497, 0, 0, 0, 0, -35.7139, 8.46314, 0, 0, 0, 0, -45.4642, 13.2065 )
+}
+
+[sub_resource type="Animation" id=2]
+
+length = 8.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:unit_offset")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 8 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 14.8213, 16.5087 )
+
+[node name="CircularFlyer" type="KinematicBody2D"]
+
+input/pickable = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 1 )
+maxHealth = 100
+currentHealth = 100
+damage = 40
+directionH = 1
+directionV = 1
+speedH = 0
+speedV = 0
+speed = 0
+acceleration = 0
+vulnFreeze = true
+vulnElectric = true
+enemyType = 1
+
+[node name="CirclePath" type="Path2D" parent="."]
+
+curve = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CirclePathFollow" type="PathFollow2D" parent="CirclePath"]
+
+transform/pos = Vector2( 18.0205, 106.809 )
+transform/rot = 4.44074
+offset = 176.744
+h_offset = 0.0
+v_offset = 0.0
+rotate = true
+cubic_interp = true
+loop = true
+lookahead = 4.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CircularFlying" type="AnimationPlayer" parent="CirclePath/CirclePathFollow"]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/CircularFlyer = SubResource( 2 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = "CircularFlyer"
+
+[node name="Sprite" type="Sprite" parent="CirclePath/CirclePathFollow"]
+
+transform/rot = 149.513
+texture = ExtResource( 2 )
+vframes = 5
+hframes = 5
+frame = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="playerDamage" type="Area2D" parent="CirclePath/CirclePathFollow"]
+
+transform/pos = Vector2( 3.14713e-05, -7.62939e-06 )
+transform/rot = 4.26887e-06
+input/pickable = true
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 0.865198, 0, 0, 0.885525, 2.40235, 1.22033 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="damagePlayer" type="CollisionShape2D" parent="CirclePath/CirclePathFollow/playerDamage"]
+
+transform/pos = Vector2( 2.40235, 1.22033 )
+transform/scale = Vector2( 0.865198, 0.885525 )
+shape = SubResource( 3 )
+trigger = false
+_update_shape_index = 0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Despawn" type="VisibilityNotifier2D" parent="CirclePath/CirclePathFollow"]
+
+transform/pos = Vector2( -12.9197, -105.125 )
+transform/rot = -4.44074
+transform/scale = Vector2( 35, 35 )
+rect = Rect2( -10, -10, 20, 20 )
+
+[connection signal="body_enter" from="CirclePath/CirclePathFollow/playerDamage" to="." method="_on_playerDamage_body_enter"]
+
+[connection signal="exit_viewport" from="CirclePath/CirclePathFollow/Despawn" to="." method="_on_Despawn_exit_viewport"]
+
+

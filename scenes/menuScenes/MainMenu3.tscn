@@ -1,0 +1,184 @@
+[gd_scene load_steps=10 format=1]
+
+[ext_resource path="res://scripts/menuScripts/menuScript.gd" type="Script" id=1]
+[ext_resource path="res://scenes/menuScenes/MenuBackground.scn" type="PackedScene" id=2]
+[ext_resource path="res://GameFont.fnt" type="BitmapFont" id=3]
+[ext_resource path="res://sprites/SoundEffects/Jump.smp" type="Sample" id=4]
+[ext_resource path="res://sprites/SoundEffects/Laser.smp" type="Sample" id=5]
+[ext_resource path="res://sprites/SoundEffects/Laser2.smp" type="Sample" id=6]
+[ext_resource path="res://sprites/SoundEffects/Laser3.smp" type="Sample" id=7]
+[ext_resource path="res://sprites/SoundEffects/Run.smp" type="Sample" id=8]
+
+[sub_resource type="SampleLibrary" id=1]
+
+samples/Jump = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 4 )
+}
+samples/Laser = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 5 )
+}
+samples/Laser2 = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 6 )
+}
+samples/Laser3 = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 7 )
+}
+samples/Run = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 8 )
+}
+
+[node name="Node" type="Node"]
+
+[node name="MainMenu" type="VBoxContainer" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 165.0
+margin/top = 2.0
+margin/right = 909.0
+margin/bottom = 599.0
+alignment = 0
+script/script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="MenuBackground" parent="MainMenu" instance=ExtResource( 2 )]
+
+visibility/behind_parent = true
+transform/pos = Vector2( -666.688, -340.221 )
+transform/scale = Vector2( 2.0107, 1.87168 )
+
+[node name="Play" type="Button" parent="MainMenu"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 744.0
+margin/bottom = 146.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color_disabled = Color( 0.0360107, 0.236714, 0.921875, 1 )
+custom_colors/font_color = Color( 0.0360107, 0.236714, 0.921875, 1 )
+custom_colors/font_color_hover = Color( 0.0360107, 0.236714, 0.921875, 1 )
+custom_colors/font_color_pressed = Color( 0.0360107, 0.236714, 0.921875, 1 )
+toggle_mode = false
+click_on_press = true
+enabled_focus_mode = 0
+shortcut = null
+text = "Play"
+flat = true
+
+[node name="Options" type="Button" parent="MainMenu"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 150.0
+margin/right = 744.0
+margin/bottom = 296.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color_disabled = Color( 0.0360107, 0.236714, 0.921875, 1 )
+custom_colors/font_color = Color( 0.0360107, 0.236714, 0.921875, 1 )
+custom_colors/font_color_hover = Color( 0.0360107, 0.236714, 0.921875, 1 )
+custom_colors/font_color_pressed = Color( 0.0360107, 0.236714, 0.921875, 1 )
+toggle_mode = false
+click_on_press = true
+enabled_focus_mode = 0
+shortcut = null
+text = "Options"
+flat = true
+
+[node name="Credits" type="Button" parent="MainMenu"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 300.0
+margin/right = 744.0
+margin/bottom = 446.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color_disabled = Color( 0.0360107, 0.236714, 0.921875, 1 )
+custom_colors/font_color = Color( 0.0360107, 0.236714, 0.921875, 1 )
+custom_colors/font_color_hover = Color( 0.0360107, 0.236714, 0.921875, 1 )
+custom_colors/font_color_pressed = Color( 0.0360107, 0.236714, 0.921875, 1 )
+toggle_mode = false
+click_on_press = true
+enabled_focus_mode = 0
+shortcut = null
+text = "Credits"
+flat = true
+
+[node name="Exit" type="Button" parent="MainMenu"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 450.0
+margin/right = 744.0
+margin/bottom = 597.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color_disabled = Color( 0.0360107, 0.236714, 0.921875, 1 )
+custom_colors/font_color = Color( 0.0360107, 0.236714, 0.921875, 1 )
+custom_colors/font_color_hover = Color( 0.0360107, 0.236714, 0.921875, 1 )
+custom_colors/font_color_pressed = Color( 0.0360107, 0.236714, 0.921875, 1 )
+toggle_mode = false
+click_on_press = true
+enabled_focus_mode = 0
+shortcut = null
+text = "Exit"
+flat = true
+
+[node name="SamplePlayer" type="SamplePlayer" parent="."]
+
+config/polyphony = 3
+config/samples = SubResource( 1 )
+default/volume_db = 0.0
+default/pitch_scale = 1.0
+default/pan = 0.0
+default/depth = 0.0
+default/height = 0.0
+default/filter/type = 0
+default/filter/cutoff = 5000.0
+default/filter/resonance = 1.0
+default/filter/gain = 1.0
+default/reverb_room = 2
+default/reverb_send = 0.0
+default/chorus_send = 0.0
+
+[connection signal="pressed" from="MainMenu/Play" to="MainMenu" method="_on_Play_pressed"]
+
+[connection signal="pressed" from="MainMenu/Options" to="MainMenu" method="_on_Options_pressed"]
+
+[connection signal="pressed" from="MainMenu/Credits" to="MainMenu" method="_on_Credits_pressed"]
+
+[connection signal="pressed" from="MainMenu/Exit" to="MainMenu" method="_on_Exit_pressed"]
+
+[connection signal="pressed" from="MainMenu/Exit" to="MainMenu" method="_on_MenuButton_4_pressed"]
+
+

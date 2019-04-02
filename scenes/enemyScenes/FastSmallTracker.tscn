@@ -1,0 +1,102 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://scripts/enemyScripts/Enemy.gd" type="Script" id=1]
+[ext_resource path="res://sprites/EnemySheet.tex" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 28.4674, 6.125 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 115.455, 54.2307 )
+
+[node name="FastSmallTracker" type="KinematicBody2D"]
+
+input/pickable = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 1 )
+maxHealth = 40
+currentHealth = 40
+damage = 30
+directionH = 1
+directionV = 1
+speedH = 0
+speedV = 0
+speed = 0
+acceleration = 0
+vulnFreeze = true
+vulnElectric = true
+enemyType = 5
+
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/pos = Vector2( -2.53738, 0.0462513 )
+texture = ExtResource( 2 )
+vframes = 10
+hframes = 10
+frame = 6
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="playerDamage" type="Area2D" parent="."]
+
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 0.24517, 0, 0, 1, -4.01162, 0.17001 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="damagePlayer" type="CollisionShape2D" parent="playerDamage"]
+
+transform/pos = Vector2( -4.01162, 0.17001 )
+transform/scale = Vector2( 0.24517, 1 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="aggroArea" type="Area2D" parent="."]
+
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="aggroShape" type="CollisionShape2D" parent="aggroArea"]
+
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Despawn" type="VisibilityNotifier2D" parent="."]
+
+transform/pos = Vector2( -0.500011, -1.00001 )
+transform/scale = Vector2( 21.05, 16.15 )
+rect = Rect2( -10, -10, 20, 20 )
+
+[connection signal="body_enter" from="playerDamage" to="." method="_on_playerDamage_body_enter"]
+
+[connection signal="exit_viewport" from="Despawn" to="." method="_on_Despawn_exit_viewport"]
+
+

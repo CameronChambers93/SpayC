@@ -1,0 +1,115 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://sprites/SpriteSheet.tex" type="Texture" id=1]
+[ext_resource path="res://scripts/collectableScripts/Medkit.gd" type="Script" id=2]
+
+[sub_resource type="Curve2D" id=1]
+
+bake_interval = 5.0
+_data = {
+"points": Vector2Array( 0, 0, 0, 0, 3.94785, -11.3755, 0, 0, 0, 0, 3.82285, -31.0005 )
+}
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 8.16243, 10 )
+
+[sub_resource type="Animation" id=3]
+
+resource/name = "medKitAnimation"
+length = 3.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:unit_offset")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 3 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[node name="Medkit Node2D" type="Node2D"]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Path2D" type="Path2D" parent="."]
+
+curve = SubResource( 1 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+
+transform/pos = Vector2( 5, -15 )
+transform/rot = 172.289
+offset = 0.0
+h_offset = 0.0
+v_offset = 0.0
+rotate = true
+cubic_interp = true
+loop = true
+lookahead = 4.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Medkit Sprite" type="Sprite" parent="Path2D/PathFollow2D"]
+
+transform/pos = Vector2( 4, 4 )
+texture = ExtResource( 1 )
+vframes = 20
+hframes = 20
+frame = 14
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Medkit1" type="Area2D" parent="Path2D/PathFollow2D/Medkit Sprite" groups=[
+"collectable",
+]]
+
+transform/pos = Vector2( -18.7401, -0.575339 )
+transform/rot = -69.3256
+input/pickable = false
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 0.362638, 0, 7.45058e-09, 0.307692, 4.03999, 4 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/Medkit Sprite/Medkit1"]
+
+transform/pos = Vector2( 4.03999, 4 )
+transform/rot = 1.38738e-06
+transform/scale = Vector2( 0.362638, 0.307692 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Path2D/PathFollow2D"]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/medKitAnimation = SubResource( 3 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = "medKitAnimation"
+
+[connection signal="body_enter" from="Path2D/PathFollow2D/Medkit Sprite/Medkit1" to="Path2D/PathFollow2D/Medkit Sprite/Medkit1" method="_on_Medkit1_body_enter"]
+
+

@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://scripts/enemyScripts/EnemySpawn.gd" type="Script" id=1]
+
+[sub_resource type="Curve2D" id=1]
+
+bake_interval = 5.0
+_data = {
+"points": Vector2Array( 0, 0, 0, 0, -45.4642, 13.2065, 0, 0, 0, 0, -66.8093, 36.1328, 0, 0, 0, 0, -74.4514, 63.0118, 0, 0, 0, 0, -72.6067, 84.3569, 0, 0, 0, 0, -55.7414, 97.7965, 0, 0, 0, 0, -25.1731, 105.966, 0, 0, 0, 0, 5.1317, 107.81, 0, 0, 0, 0, 32.2743, 105.702, 0, 0, 0, 0, 53.3559, 98.06, 0, 0, 0, 0, 64.9508, 89.6273, 0, 0, 0, 0, 77.0727, 76.9784, 0, 0, 0, 0, 86.5594, 64.8564, 0, 0, 0, 0, 91.8298, 47.9912, 0, 0, 0, 0, 90.5122, 37.9774, 0, 0, 0, 0, 85.7689, 25.3284, 0, 0, 0, 0, 80.2349, 16.8958, 0, 0, 0, 0, 69.1671, 9.51722, 0, 0, 0, 0, 65.2143, 8.46314, 0, 0, 0, 0, 54.937, 5.82794, 0, 0, 0, 0, 46.7679, 5.03737, 0, 0, 0, 0, 39.6528, 4.77386, 0, 0, 0, 0, 19.3618, 4.77386, 0, 0, 0, 0, -1.71982, 5.03737, 0, 0, 0, 0, -18.3216, 5.3009, 0, 0, 0, 0, -28.8624, 6.35497, 0, 0, 0, 0, -35.7139, 8.46314, 0, 0, 0, 0, -45.4642, 13.2065 )
+}
+
+[node name="CircularSpawn" type="Node2D"]
+
+[node name="CirclePath" type="Path2D" parent="."]
+
+transform/pos = Vector2( -0.72167, 0.12273 )
+transform/scale = Vector2( 1, 1 )
+curve = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="EnemyVisibility" type="VisibilityNotifier2D" parent="."]
+
+transform/pos = Vector2( -6.10167, 46.7957 )
+transform/scale = Vector2( 16.7365, 10.7021 )
+rect = Rect2( -10, -10, 20, 20 )
+script/script = ExtResource( 1 )
+enemyNumber = 1
+
+[node name="SpawnPoint" type="Node2D" parent="EnemyVisibility"]
+
+transform/pos = Vector2( -0.127361, -4.97187 )
+transform/scale = Vector2( 0.0551096, 0.0874966 )
+
+[connection signal="enter_viewport" from="EnemyVisibility" to="EnemyVisibility" method="_on_EnemyVisibility_enter_viewport"]
+
+
