@@ -14,3 +14,5 @@ My major contributions are as followed:
     - rocketAmmo.gd - For picking up special ammo
     
   - <b>Music</b>: I helped in implementing background music, sounds effects, and volume controls for both of them
+
+<a href="https://docs.google.com/presentation/d/e/2PACX-1vREi6W0swDoYuUR8WHu3HRUQ9T1VTTJQce4uiEqxwsrRxEFWnPHjvNLYc4rsFEsbqWaFLQoyR96F9kY/pub?start=false&loop=false&delayms=5000">Link to our final presentation</a>
